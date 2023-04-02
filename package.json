@@ -1,0 +1,14 @@
+{
+  "name": "audio_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "audio.js",
+  "scripts": {
+    "test": "node ./audio.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/speech": "^5.4.0"
+  }
+}
