@@ -5,6 +5,8 @@
 
 const speech = require('@google-cloud/speech');
 const fs = require('fs');
+
+
 // Creates a client
 const client = new speech.SpeechClient();
 async function transcribeSpeech(gcsUri) {
@@ -42,23 +44,27 @@ async function transcribeSpeech(gcsUri) {
 		  .map(result => result.alternatives[0].transcript)
 		  .join('\n');
 		//console.log(`Transcription: ${transcription}`);
-		return `\nfilename - ${gcsUri} \n${transcription}`;
+		return `${transcription}`;
 	}
 	catch(error){
-		return `\n${gcsUri} - error: ${error}\n`;
+		return `\n${gcsUri} - ERROR: ${error}\n`;
 	}
 }
 
 async function main() {
 	try {
 		const filenames = [
-		"gs://example-audio-green/20230401.174704122_file.opus",
-		"gs://example-audio-green/20230401.174704238_file.opus",
-		"gs://example-audio-green/20230401.174704354_file.opus",
-		"gs://example-audio-green/20230401.174704501_file.opus",
-		"gs://example-audio-green/20230401.174704623_file.opus",
-		"gs://example-audio-green/20230401.174704724_file.opus",
-		"gs://example-audio-green/20230401.174704855_file.opus"
+				"PTT-20230330-WA0003.opus",
+				/*
+				"PTT-20230330-WA0004.opus",
+				"PTT-20230330-WA0007.opus",
+				"PTT-20230330-WA0011.opus",
+				"PTT-20230330-WA0020.opus",
+				"PTT-20230330-WA0025.opus",
+				"PTT-20230330-WA0026.opus",
+				"PTT-20230330-WA0027.opus",
+				"PTT-20230330-WA0028.opus",
+				*/
 
 		];
 		//let promises = [];
@@ -67,11 +73,15 @@ async function main() {
 		//}
 		const results = await Promise.all(filenames.map(filename => {
 			console.log(`processing filename ${filename}`)
-			return transcribeSpeech(filename)
+			return transcribeSpeech("gs://example-audio-green/" + filename)
 		}));
 		//console.log(results);
 		const timeInMss = new Date().getTime();
-		fs.writeFileSync(`./output-${timeInMss}`, results.join('\n'));
+		let raw_text = fs.readFileSync('./wtsapp_chat.txt', 'utf8');
+		for(let i = 0; i < results.length ; ++i) {
+			raw_text = raw_text.replace(`${filenames[i]} (附件檔案)`, `${filenames[i]} (附件檔案)\n ${results[i]}`);
+		}
+		fs.writeFileSync(`./output-${timeInMss}`, raw_text);
 		console.log(`main, Done, result length: ${results.length}`);
 	}
 	catch (err){
