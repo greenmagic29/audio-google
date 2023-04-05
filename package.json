@@ -4,7 +4,8 @@
   "description": "",
   "main": "audio.js",
   "scripts": {
-    "test": "node ./audio.js"
+    "test": "node ./audio.js",
+    "pic": "node ./picture.js"
   },
   "author": "",
   "license": "ISC",

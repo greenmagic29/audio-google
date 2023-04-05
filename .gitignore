@@ -1,3 +1,6 @@
 node_modules
 wtsapp_chat.txt
 output-*
+pictures/*
+pictures-*
+.obsidian

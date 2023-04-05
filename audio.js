@@ -77,11 +77,11 @@ async function main() {
 		}));
 		//console.log(results);
 		const timeInMss = new Date().getTime();
-		let raw_text = fs.readFileSync('./wtsapp_chat.txt', 'utf8');
+		let raw_text = fs.readFileSync('./wtsapp_chat.txt', {encoding: 'utf8'});
 		for(let i = 0; i < results.length ; ++i) {
 			raw_text = raw_text.replace(`${filenames[i]} (附件檔案)`, `${filenames[i]} (附件檔案)\n ${results[i]}`);
 		}
-		fs.writeFileSync(`./output-${timeInMss}`, raw_text);
+		fs.writeFileSync(`./output-${timeInMss}`, raw_text, {encoding: 'utf-8'});
 		console.log(`main, Done, result length: ${results.length}`);
 	}
 	catch (err){
