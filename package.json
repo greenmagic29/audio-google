@@ -5,7 +5,8 @@
   "main": "audio.js",
   "scripts": {
     "test": "node ./audio.js",
-    "pic": "node ./picture.js"
+    "pic": "node ./picture.js",
+    "guess": "node ./guess_file.js"
   },
   "author": "",
   "license": "ISC",
