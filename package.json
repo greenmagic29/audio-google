@@ -6,7 +6,9 @@
   "scripts": {
     "test": "node ./audio.js",
     "pic": "node ./picture.js",
-    "guess": "node ./guess_file.js"
+    "guess": "node ./guess_file.js",
+    "guess2": "node ./whatsapp_guess_2.js",
+    "audio2": "node ./audio_guess.js"
   },
   "author": "",
   "license": "ISC",
