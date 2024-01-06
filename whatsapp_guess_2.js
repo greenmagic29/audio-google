@@ -12,6 +12,8 @@ dayjs.extend(customParseFormat)
 //replace the string once
 //use string .replace("the date", `SEARCH_RESULT\nTHE_DATE`)
 
+//C:\Users\wyp60\Downloads\digital-strata-382312-da9b9c43e479-google-key.json
+
 async function searchFilesPath(date) {
 	const searchDate = dayjs(date, 'D/M/YYYY').format('YYYYMMDD');
 	//cmd commmand: find /h/git/JUPAS -name 'PTT-20230102-WA* | sort -V'
@@ -25,7 +27,7 @@ async function searchFilesPath(date) {
 
 async function main() {
 try{
-	let raw_text = fs.readFileSync('./chat_old.txt', {encoding: 'utf8'});
+	let raw_text = fs.readFileSync('./refined.txt', {encoding: 'utf8'});
 	const timeInMss = new Date().getTime();
 	const getMediaReg = new RegExp(`(.*) .* - .* <Media omitted>\n`, 'gi');
 
